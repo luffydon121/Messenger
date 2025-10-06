@@ -3,16 +3,88 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Luffy chime services</title>
+    <title>Puti Dibash Services - Best Rate</title>
     <link rel="stylesheet" href="style.css">
+    <style>
+        /* Inlined CSS for quick demo; you can move this to style.css if preferred */
+        body {
+            background: linear-gradient(135deg, #e0eafc, #cfdef3);
+            min-height: 100vh;
+            margin: 0;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .container {
+            background: #fff;
+            border-radius: 18px;
+            box-shadow: 0 6px 30px rgba(0,0,0,0.11);
+            padding: 2.5rem 2rem 2rem 2rem;
+            max-width: 370px;
+            text-align: center;
+        }
+        h1 {
+            margin-top: 0;
+            color: #286090;
+        }
+        .subtitle {
+            color: #333;
+            font-size: 1.15rem;
+            margin-bottom: 1.7rem;
+        }
+        .owner {
+            font-weight: bold;
+            color: #3b5998;
+            margin-bottom: 1.3rem;
+            font-size: 1.1rem;
+        }
+        .service-btn {
+            background: #007bff;
+            color: #fff;
+            padding: 0.85rem 2.2rem;
+            border: none;
+            border-radius: 25px;
+            font-size: 1.07rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+            margin-bottom: 1.1rem;
+        }
+        .service-btn:hover {
+            background: #0056b3;
+        }
+        #message {
+            color: #4CAF50;
+            font-size: 1rem;
+            font-weight: 500;
+            margin-top: 0.5rem;
+            min-height: 1.2em;
+        }
+        @media (max-width: 500px) {
+            .container {
+                padding: 1.2rem 0.5rem;
+                max-width: 98vw;
+            }
+        }
+    </style>
 </head>
 <body>
     <div class="container">
-        <h1>Welcome to Sagar Chime Service - Best Rate!</h1>
-        <p>This is a simple test page hosted on GitHub Pages.</p>
-        <button id="clickMe">Click Me</button>
-        <p id="message"></p>
+        <h1>Service Available at Best Rate!</h1>
+        <div class="subtitle">
+            High quality, fast, and reliable services tailored for you.
+        </div>
+        <div class="owner">
+            My name is <span style="color:#286090;">Puti Dibash</span>
+        </div>
+        <button class="service-btn" id="clickMe">Get Best Offer</button>
+        <div id="message"></div>
     </div>
-    <script src="script.js"></script>
+    <script>
+        document.getElementById('clickMe').onclick = function() {
+            document.getElementById('message').textContent = "Thank you for choosing Puti Dibash! We'll get back to you with the best rate.";
+        };
+    </script>
 </body>
 </html>
