@@ -6,7 +6,6 @@
     <title>Puti Dibash Services - Best Rate</title>
     <link rel="stylesheet" href="style.css">
     <style>
-        /* Inlined CSS for quick demo; you can move this to style.css if preferred */
         body {
             background: linear-gradient(135deg, #e0eafc, #cfdef3);
             min-height: 100vh;
@@ -21,7 +20,7 @@
             border-radius: 18px;
             box-shadow: 0 6px 30px rgba(0,0,0,0.11);
             padding: 2.5rem 2rem 2rem 2rem;
-            max-width: 370px;
+            max-width: 420px;
             text-align: center;
         }
         h1 {
@@ -31,7 +30,7 @@
         .subtitle {
             color: #333;
             font-size: 1.15rem;
-            margin-bottom: 1.7rem;
+            margin-bottom: 1.2rem;
         }
         .owner {
             font-weight: bold;
@@ -61,6 +60,55 @@
             margin-top: 0.5rem;
             min-height: 1.2em;
         }
+        .social-section {
+            margin-top: 2rem;
+        }
+        .instagram-embed {
+            margin-top: 1.2rem;
+            border-radius: 14px;
+            overflow: hidden;
+            background: #fafafa;
+            border: 1px solid #ddd;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+        }
+        .contact-form {
+            margin-top: 2rem;
+            text-align: left;
+        }
+        .contact-form label {
+            display: block;
+            margin-bottom: 0.4rem;
+            color: #333;
+        }
+        .contact-form input, .contact-form textarea {
+            width: 100%;
+            border: 1px solid #b0b0b0;
+            border-radius: 7px;
+            padding: 0.55rem;
+            margin-bottom: 0.9rem;
+            font-size: 1rem;
+            font-family: inherit;
+        }
+        .contact-form button {
+            background: #2ecc40;
+            color: #fff;
+            border: none;
+            padding: 0.6rem 1.8rem;
+            border-radius: 18px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .contact-form button:hover {
+            background: #238d2b;
+        }
+        .thankyou {
+            color: #286090;
+            font-weight: 600;
+            margin-top: 0.7rem;
+            text-align: center;
+        }
         @media (max-width: 500px) {
             .container {
                 padding: 1.2rem 0.5rem;
@@ -80,10 +128,42 @@
         </div>
         <button class="service-btn" id="clickMe">Get Best Offer</button>
         <div id="message"></div>
+
+        <div class="social-section">
+            <h2 style="font-size:1.1rem; color:#e4405f; margin-bottom:0.5rem;">Check our Instagram:</h2>
+            <div class="instagram-embed">
+                <!-- Instagram Embed -->
+                <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DOLkPxJAVwL/" data-instgrm-version="14" style="width:100%; min-width:300px; margin:0 auto;">
+                </blockquote>
+            </div>
+        </div>
+
+        <form class="contact-form" id="contactForm">
+            <h2 style="font-size:1.07rem; margin-bottom:0.7rem;">Contact Us</h2>
+            <label for="name">Your Name</label>
+            <input type="text" id="name" name="name" required autocomplete="off">
+            <label for="email">Your Email</label>
+            <input type="email" id="email" name="email" required autocomplete="off">
+            <label for="msg">Message</label>
+            <textarea id="msg" name="msg" rows="3" required></textarea>
+            <button type="submit">Send</button>
+            <div class="thankyou" id="thankyouMessage" style="display:none;">Thank you for contacting us!</div>
+        </form>
     </div>
+    <script async src="//www.instagram.com/embed.js"></script>
     <script>
         document.getElementById('clickMe').onclick = function() {
             document.getElementById('message').textContent = "Thank you for choosing Puti Dibash! We'll get back to you with the best rate.";
+        };
+
+        // Simple feedback form (just shows thank you message on submit)
+        document.getElementById('contactForm').onsubmit = function(e) {
+            e.preventDefault();
+            document.getElementById('thankyouMessage').style.display = 'block';
+            setTimeout(function() {
+                document.getElementById('thankyouMessage').style.display = 'none';
+                document.getElementById('contactForm').reset();
+            }, 2600);
         };
     </script>
 </body>
