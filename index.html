@@ -1015,6 +1015,310 @@ footer::before{
 .reveal-delay-3{transition-delay:0.36s}
 .reveal-delay-4{transition-delay:0.48s}
 
+/* ===== BUTTERFLY CURSOR TRAIL ===== */
+.butterfly-trail{
+  position:fixed;pointer-events:none;z-index:9996;
+  font-size:1.1rem;
+  animation:butterflyDrift 1.8s ease-out forwards;
+  filter:drop-shadow(0 2px 4px rgba(206,147,216,0.3));
+}
+@keyframes butterflyDrift{
+  0%{opacity:1;transform:scale(1) rotate(0deg) translateY(0)}
+  50%{opacity:0.7;transform:scale(1.2) rotate(15deg) translateY(-30px)}
+  100%{opacity:0;transform:scale(0.3) rotate(-20deg) translateY(-80px)}
+}
+
+/* ===== NIGHT MODE TOGGLE ===== */
+#night-toggle{
+  position:fixed;top:1.5rem;right:1.5rem;z-index:700;
+  width:52px;height:28px;border-radius:14px;
+  background:linear-gradient(135deg,var(--rose-light),var(--mauve));
+  border:none;cursor:pointer;padding:0;
+  box-shadow:0 2px 10px rgba(0,0,0,0.1);
+  transition:all 0.5s cubic-bezier(.4,0,.2,1);
+  overflow:hidden;position:relative;
+}
+#night-toggle .toggle-knob{
+  position:absolute;top:3px;left:3px;
+  width:22px;height:22px;border-radius:50%;
+  background:var(--white);
+  box-shadow:0 1px 4px rgba(0,0,0,0.15);
+  transition:all 0.5s cubic-bezier(.4,0,.2,1);
+  display:flex;align-items:center;justify-content:center;font-size:11px;
+}
+body.night-mode #night-toggle{background:linear-gradient(135deg,#1a237e,#311b92)}
+body.night-mode #night-toggle .toggle-knob{left:27px}
+body.night-mode{
+  --cream:#1a1028;--blush:#1e1230;--rose-pale:#2a1535;
+  --white:#2d1840;--text-dark:#f3e0f7;--text-mid:#c9a0d8;--text-soft:#8a6498;
+  background:var(--cream);color:var(--text-dark);
+}
+body.night-mode .love-letter,
+body.night-mode .quiz-card,
+body.night-mode .timeline-card,
+body.night-mode .moment-card,
+body.night-mode .countdown-box,
+body.night-mode .wish-card,
+body.night-mode .poem-machine,
+body.night-mode .gift-wrap .gift-bg{
+  background:rgba(42,21,53,0.9)!important;
+  border-color:rgba(206,147,216,0.2)!important;
+}
+body.night-mode footer{
+  background:linear-gradient(180deg,#1e1230,#2a1535)!important;
+}
+body.night-mode #music-player{
+  background:rgba(42,21,53,0.85)!important;
+  border-color:rgba(206,147,216,0.2)!important;
+}
+body.night-mode .envelope-body{
+  background:linear-gradient(180deg,#2a1535,#351a40)!important;
+}
+body.night-mode .envelope-flap{
+  background:linear-gradient(180deg,#4a2060,#2a1535)!important;
+}
+body.night-mode #starry-canvas{opacity:0.9}
+
+/* ===== GIFT BOX SECTION ===== */
+#gift-section{
+  background:
+    radial-gradient(ellipse at 50% 50%,rgba(212,160,86,0.1),transparent 50%),
+    linear-gradient(180deg,var(--blush),var(--cream));
+  text-align:center;
+}
+.gift-grid{
+  display:flex;justify-content:center;gap:clamp(1.5rem,4vw,3rem);
+  flex-wrap:wrap;max-width:700px;margin:0 auto;
+}
+.gift-box{
+  width:clamp(120px,20vw,160px);height:clamp(120px,20vw,160px);
+  position:relative;cursor:pointer;
+  transition:transform 0.3s;
+}
+.gift-box:hover{transform:scale(1.08)}
+.gift-box:active{transform:scale(0.95)}
+.gift-wrap{
+  width:100%;height:100%;position:relative;
+  border-radius:16px;overflow:hidden;
+  box-shadow:0 8px 30px rgba(233,30,99,0.15);
+  transition:all 0.6s cubic-bezier(.4,0,.2,1);
+}
+.gift-wrap .gift-bg{
+  position:absolute;inset:0;border-radius:16px;
+}
+.gift-wrap .gift-ribbon-v{
+  position:absolute;top:0;bottom:0;left:50%;width:16px;
+  background:linear-gradient(90deg,var(--gold-light),var(--gold),var(--gold-light));
+  transform:translateX(-50%);z-index:1;
+}
+.gift-wrap .gift-ribbon-h{
+  position:absolute;left:0;right:0;top:50%;height:16px;
+  background:linear-gradient(180deg,var(--gold-light),var(--gold),var(--gold-light));
+  transform:translateY(-50%);z-index:1;
+}
+.gift-wrap .gift-bow{
+  position:absolute;top:-8px;left:50%;transform:translateX(-50%);
+  font-size:2rem;z-index:3;filter:drop-shadow(0 2px 6px rgba(212,160,86,0.4));
+}
+.gift-box.opened .gift-wrap{
+  transform:rotateX(-90deg) scale(0.5);opacity:0;pointer-events:none;
+}
+.gift-reveal{
+  position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+  flex-direction:column;gap:0.5rem;
+  opacity:0;transform:scale(0.5);
+  transition:all 0.6s 0.3s cubic-bezier(.4,0,.2,1);
+}
+.gift-box.opened .gift-reveal{opacity:1;transform:scale(1)}
+.gift-reveal-emoji{font-size:2.5rem;animation:giftPop 0.6s 0.3s cubic-bezier(.68,-.55,.27,1.55) both}
+.gift-reveal-text{
+  font-family:'Cormorant Garamond',serif;font-size:0.85rem;
+  color:var(--text-mid);font-style:italic;text-align:center;
+  max-width:120px;
+}
+@keyframes giftPop{0%{transform:scale(0) rotate(-20deg)}100%{transform:scale(1) rotate(0)}}
+
+/* ===== ENVELOPE LOVE LETTER ===== */
+#envelope-section{
+  background:
+    radial-gradient(ellipse at 50% 40%,rgba(248,187,208,0.2),transparent 50%),
+    linear-gradient(180deg,var(--cream),var(--blush));
+  text-align:center;
+  min-height:60vh;display:flex;flex-direction:column;align-items:center;justify-content:center;
+}
+.envelope-wrapper{
+  cursor:pointer;margin:0 auto;
+  width:clamp(260px,55vw,380px);
+}
+.envelope{
+  position:relative;
+  width:100%;aspect-ratio:1.5;
+}
+.envelope-body{
+  width:100%;height:100%;
+  background:linear-gradient(180deg,#fce4ec,#fff0f3);
+  border-radius:6px;
+  box-shadow:0 10px 40px rgba(233,30,99,0.12);
+  position:relative;overflow:hidden;
+  border:1px solid rgba(248,187,208,0.4);
+}
+.envelope-flap{
+  position:absolute;top:0;left:0;right:0;
+  height:55%;
+  background:linear-gradient(180deg,#f8bbd0,#fce4ec);
+  clip-path:polygon(0 0,50% 100%,100% 0);
+  transform-origin:top center;
+  transition:transform 0.8s cubic-bezier(.4,0,.2,1);
+  z-index:2;
+}
+.envelope-wrapper.opened .envelope-flap{
+  transform:rotateX(180deg);
+}
+.envelope-seal{
+  position:absolute;top:30%;left:50%;transform:translate(-50%,-50%);
+  font-size:2rem;z-index:3;
+  transition:all 0.5s;
+  filter:drop-shadow(0 2px 10px rgba(212,160,86,0.4));
+}
+.envelope-wrapper.opened .envelope-seal{
+  opacity:0;transform:translate(-50%,-50%) scale(0);
+}
+.envelope-letter-inside{
+  position:absolute;left:8%;right:8%;bottom:10%;top:20%;
+  background:var(--white);border-radius:4px;padding:clamp(0.8rem,2vw,1.2rem);
+  box-shadow:inset 0 0 20px rgba(248,187,208,0.1);
+  display:flex;align-items:center;justify-content:center;text-align:center;
+  opacity:0;transform:translateY(30px);
+  transition:all 0.8s 0.5s cubic-bezier(.4,0,.2,1);
+}
+.envelope-wrapper.opened .envelope-letter-inside{
+  opacity:1;transform:translateY(0);
+}
+.envelope-letter-inside p{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(0.78rem,1.8vw,1rem);
+  color:var(--text-dark);line-height:1.7;
+  font-style:italic;
+}
+.envelope-hint{
+  font-size:0.85rem;color:var(--text-soft);margin-top:1.5rem;
+  animation:envelopePulse 2s ease-in-out infinite;
+}
+@keyframes envelopePulse{0%,100%{opacity:0.5}50%{opacity:1}}
+
+/* ===== POEM GENERATOR ===== */
+#poem-section{
+  background:
+    radial-gradient(ellipse at 40% 60%,rgba(225,190,231,0.15),transparent 50%),
+    linear-gradient(180deg,var(--blush),var(--cream));
+  text-align:center;
+}
+.poem-machine{
+  max-width:520px;margin:0 auto;
+  background:var(--white);border-radius:24px;
+  padding:clamp(2rem,5vw,3rem);
+  box-shadow:0 12px 50px rgba(233,30,99,0.08);
+  border:1px solid rgba(248,187,208,0.25);
+  position:relative;overflow:hidden;
+}
+.poem-machine::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:4px;
+  background:linear-gradient(90deg,var(--mauve),var(--rose),var(--gold-light),var(--mauve));
+  background-size:200%;animation:shimmerBar 4s linear infinite;
+}
+.poem-display{
+  min-height:180px;display:flex;align-items:center;justify-content:center;
+  padding:1.5rem;
+}
+.poem-text{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(1.05rem,2.5vw,1.25rem);
+  line-height:2;color:var(--text-dark);
+  font-style:italic;
+  opacity:0;transform:translateY(15px);
+  transition:all 0.6s ease;
+}
+.poem-text.visible{opacity:1;transform:translateY(0)}
+.poem-btn{
+  padding:0.9rem 2.5rem;
+  background:linear-gradient(135deg,var(--mauve),var(--mauve-deep));
+  color:white;border:none;border-radius:50px;
+  font-family:'Quicksand',sans-serif;font-size:1rem;font-weight:600;
+  cursor:pointer;transition:all 0.4s;
+  box-shadow:0 4px 20px rgba(156,39,176,0.25);
+}
+.poem-btn:hover{
+  transform:translateY(-3px) scale(1.04);
+  box-shadow:0 8px 30px rgba(156,39,176,0.35);
+}
+.poem-btn:active{transform:scale(0.96)}
+.poem-author{
+  font-family:'Great Vibes',cursive;font-size:1.3rem;
+  color:var(--rose);margin-top:1rem;
+  opacity:0;transition:opacity 0.6s 0.3s;
+}
+.poem-author.visible{opacity:1}
+
+/* ===== STARRY CANVAS ===== */
+#starry-canvas{
+  position:absolute;inset:0;z-index:0;pointer-events:none;
+  opacity:0.25;
+}
+body.night-mode #starry-canvas{opacity:0.85}
+
+/* ===== SCROLL PROGRESS BAR ===== */
+#scroll-progress{
+  position:fixed;top:0;left:0;height:3px;z-index:9999;
+  background:linear-gradient(90deg,var(--rose),var(--mauve),var(--gold));
+  width:0%;
+  box-shadow:0 0 10px rgba(233,30,99,0.4);
+}
+
+/* ===== PHOTO LIGHTBOX ===== */
+#lightbox{
+  position:fixed;inset:0;z-index:10001;
+  background:rgba(0,0,0,0.88);backdrop-filter:blur(12px);
+  display:flex;align-items:center;justify-content:center;
+  flex-direction:column;gap:1rem;
+  opacity:0;pointer-events:none;
+  transition:opacity 0.4s cubic-bezier(.4,0,.2,1);
+}
+#lightbox.active{opacity:1;pointer-events:auto}
+#lightbox img{
+  max-width:85vw;max-height:75vh;border-radius:16px;
+  box-shadow:0 20px 60px rgba(0,0,0,0.4);
+  transform:scale(0.9);transition:transform 0.4s cubic-bezier(.4,0,.2,1);
+}
+#lightbox.active img{transform:scale(1)}
+.lightbox-close{
+  position:absolute;top:1.5rem;right:1.5rem;
+  width:44px;height:44px;border-radius:50%;
+  background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.2);
+  color:white;font-size:1.4rem;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  transition:all 0.3s;backdrop-filter:blur(8px);
+}
+.lightbox-close:hover{background:rgba(255,255,255,0.3);transform:scale(1.1)}
+.lightbox-caption{
+  color:rgba(255,255,255,0.8);font-family:'Cormorant Garamond',serif;
+  font-size:1.1rem;font-style:italic;text-align:center;
+}
+
+/* ===== BACK TO TOP ===== */
+#back-to-top{
+  position:fixed;bottom:5rem;right:1.5rem;z-index:600;
+  width:44px;height:44px;border-radius:50%;
+  background:rgba(255,255,255,0.75);backdrop-filter:blur(15px);
+  border:1px solid rgba(248,187,208,0.3);
+  box-shadow:0 4px 15px rgba(233,30,99,0.1);
+  cursor:pointer;font-size:1.2rem;
+  display:flex;align-items:center;justify-content:center;
+  opacity:0;pointer-events:none;
+  transition:all 0.4s cubic-bezier(.4,0,.2,1);
+}
+#back-to-top.visible{opacity:1;pointer-events:auto}
+#back-to-top:hover{transform:translateY(-3px);box-shadow:0 6px 20px rgba(233,30,99,0.2)}
+
 /* ===== RESPONSIVE ===== */
 @media(max-width:700px){
   #nav-dots{display:none}
@@ -1035,6 +1339,11 @@ footer::before{
   .timeline-dot{left:-27px;width:14px;height:14px}
   .jar{width:160px;height:210px}
   .jar-lid{width:180px;height:22px}
+  .gift-box{width:100px!important;height:100px!important}
+  #night-toggle{top:1rem;right:1rem;width:44px;height:24px}
+  #night-toggle .toggle-knob{width:18px;height:18px}
+  body.night-mode #night-toggle .toggle-knob{left:23px}
+  #back-to-top{bottom:4rem;right:1rem;width:38px;height:38px;font-size:1rem}
 }
 @media(max-width:400px){
   .gallery-grid{grid-template-columns:1fr 1fr}
@@ -1045,6 +1354,24 @@ footer::before{
 </style>
 </head>
 <body>
+
+<!-- SCROLL PROGRESS -->
+<div id="scroll-progress"></div>
+
+<!-- NIGHT MODE TOGGLE -->
+<button id="night-toggle" title="Toggle Night Mode">
+  <div class="toggle-knob">☀️</div>
+</button>
+
+<!-- PHOTO LIGHTBOX -->
+<div id="lightbox">
+  <button class="lightbox-close">✕</button>
+  <img src="" alt="" id="lightbox-img">
+  <div class="lightbox-caption" id="lightbox-caption"></div>
+</div>
+
+<!-- BACK TO TOP -->
+<button id="back-to-top" title="Back to top">↑</button>
 
 <!-- INTRO OVERLAY -->
 <div id="intro-overlay">
@@ -1070,6 +1397,9 @@ footer::before{
   <button class="nav-dot" data-section="wishjar-section" title="Wishes"></button>
   <button class="nav-dot" data-section="quiz-section" title="Quiz"></button>
   <button class="nav-dot" data-section="scratch-section" title="Scratch"></button>
+  <button class="nav-dot" data-section="gift-section" title="Gifts"></button>
+  <button class="nav-dot" data-section="envelope-section" title="Envelope"></button>
+  <button class="nav-dot" data-section="poem-section" title="Poem"></button>
   <button class="nav-dot" data-section="surprise-section" title="Surprise"></button>
 </nav>
 
@@ -1087,6 +1417,7 @@ footer::before{
 
 <!-- ===== HERO ===== -->
 <section id="hero">
+  <canvas id="starry-canvas"></canvas>
   <span class="parallax-shape" data-speed="0.03">🌸</span>
   <span class="parallax-shape" data-speed="0.02">💕</span>
   <span class="parallax-shape" data-speed="0.04">🌷</span>
@@ -1351,6 +1682,96 @@ footer::before{
     <canvas id="scratch-canvas" width="320" height="200"></canvas>
   </div>
   <p class="scratch-hint reveal">✨ Use your finger or mouse to scratch!</p>
+</section>
+
+<!-- ===== GIFT BOXES ===== -->
+<section id="gift-section">
+  <h2 class="section-title reveal">Unwrap Your Gifts 🎁</h2>
+  <div class="section-divider reveal">🎀 tap each one to open 🎀</div>
+  <div class="gift-grid reveal">
+    <div class="gift-box" data-gift="0">
+      <div class="gift-wrap">
+        <div class="gift-bg" style="background:linear-gradient(135deg,#f48fb1,#e91e63)"></div>
+        <div class="gift-ribbon-v"></div>
+        <div class="gift-ribbon-h"></div>
+        <div class="gift-bow">🎀</div>
+      </div>
+      <div class="gift-reveal">
+        <span class="gift-reveal-emoji">💎</span>
+        <span class="gift-reveal-text">You are the most precious gem in my life</span>
+      </div>
+    </div>
+    <div class="gift-box" data-gift="1">
+      <div class="gift-wrap">
+        <div class="gift-bg" style="background:linear-gradient(135deg,#ce93d8,#9c27b0)"></div>
+        <div class="gift-ribbon-v"></div>
+        <div class="gift-ribbon-h"></div>
+        <div class="gift-bow">🎀</div>
+      </div>
+      <div class="gift-reveal">
+        <span class="gift-reveal-emoji">🌹</span>
+        <span class="gift-reveal-text">A thousand roses for a thousand smiles</span>
+      </div>
+    </div>
+    <div class="gift-box" data-gift="2">
+      <div class="gift-wrap">
+        <div class="gift-bg" style="background:linear-gradient(135deg,#ffcc80,#ff9800)"></div>
+        <div class="gift-ribbon-v"></div>
+        <div class="gift-ribbon-h"></div>
+        <div class="gift-bow">🎀</div>
+      </div>
+      <div class="gift-reveal">
+        <span class="gift-reveal-emoji">🌟</span>
+        <span class="gift-reveal-text">You outshine every star in the sky</span>
+      </div>
+    </div>
+    <div class="gift-box" data-gift="3">
+      <div class="gift-wrap">
+        <div class="gift-bg" style="background:linear-gradient(135deg,#81d4fa,#0288d1)"></div>
+        <div class="gift-ribbon-v"></div>
+        <div class="gift-ribbon-h"></div>
+        <div class="gift-bow">🎀</div>
+      </div>
+      <div class="gift-reveal">
+        <span class="gift-reveal-emoji">♾️</span>
+        <span class="gift-reveal-text">My love for you is infinite &amp; eternal</span>
+      </div>
+    </div>
+  </div>
+  <p class="reveal" style="text-align:center;color:var(--text-soft);margin-top:1.5rem;font-size:0.9rem">Each box holds a little piece of my heart 💝</p>
+</section>
+
+<!-- ===== ENVELOPE SECTION ===== -->
+<section id="envelope-section">
+  <h2 class="section-title reveal">A Secret Letter 💌</h2>
+  <div class="section-divider reveal">💕 sealed with a kiss 💕</div>
+  <div class="envelope-wrapper reveal" id="envelope-wrapper">
+    <div class="envelope">
+      <div class="envelope-flap"></div>
+      <div class="envelope-seal">💋</div>
+      <div class="envelope-body">
+        <div class="envelope-letter-inside">
+          <p>If I could give you one thing, I would give you the ability to see yourself through my eyes. Only then would you realize how special you truly are. You are my today and all of my tomorrows. Happy Birthday, my forever love. 💗</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <p class="envelope-hint reveal">💌 Tap the envelope to open it</p>
+</section>
+
+<!-- ===== POEM GENERATOR ===== -->
+<section id="poem-section">
+  <h2 class="section-title reveal">Love Poem For You 📝</h2>
+  <div class="section-divider reveal">🦋 freshly composed 🦋</div>
+  <div class="poem-machine reveal" id="poem-machine">
+    <div class="poem-display">
+      <div class="poem-text" id="poem-text">✨ Press the button to reveal a love poem written just for you ✨</div>
+    </div>
+    <div class="poem-author" id="poem-author">— with love</div>
+    <button class="poem-btn" id="poem-btn">
+      <span class="poem-btn-text">✨ Generate Love Poem</span>
+    </button>
+  </div>
 </section>
 
 <!-- ===== SURPRISE ===== -->
@@ -1888,12 +2309,172 @@ const timelineObs=new IntersectionObserver(entries=>{
 },{threshold:0.2});
 document.querySelectorAll('[data-timeline]').forEach(el=>timelineObs.observe(el));
 
+/* ================ SCROLL PROGRESS BAR ================ */
+window.addEventListener('scroll',()=>{
+  const h=document.documentElement.scrollHeight-window.innerHeight;
+  const p=(window.scrollY/h)*100;
+  document.getElementById('scroll-progress').style.width=p+'%';
+},{passive:true});
+
+/* ================ BACK TO TOP ================ */
+const backBtn=document.getElementById('back-to-top');
+window.addEventListener('scroll',()=>{
+  backBtn.classList.toggle('visible',window.scrollY>600);
+},{passive:true});
+backBtn.addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
+
+/* ================ NIGHT MODE ================ */
+const nightToggle=document.getElementById('night-toggle');
+nightToggle.addEventListener('click',()=>{
+  document.body.classList.toggle('night-mode');
+  const isNight=document.body.classList.contains('night-mode');
+  nightToggle.querySelector('.toggle-knob').textContent=isNight?'🌙':'☀️';
+});
+
+/* ================ PHOTO LIGHTBOX ================ */
+const lightbox=document.getElementById('lightbox');
+const lightboxImg=document.getElementById('lightbox-img');
+const lightboxCap=document.getElementById('lightbox-caption');
+document.querySelectorAll('.gallery-item').forEach(item=>{
+  item.addEventListener('click',()=>{
+    const img=item.querySelector('img');
+    const cap=item.querySelector('.gallery-caption');
+    lightboxImg.src=img.src;
+    lightboxImg.alt=img.alt;
+    lightboxCap.textContent=cap?cap.textContent:'';
+    lightbox.classList.add('active');
+  });
+});
+document.querySelector('.lightbox-close').addEventListener('click',()=>lightbox.classList.remove('active'));
+lightbox.addEventListener('click',e=>{if(e.target===lightbox)lightbox.classList.remove('active')});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')lightbox.classList.remove('active')});
+
+/* ================ STARRY NIGHT CANVAS ================ */
+function initStarryCanvas(){
+  const canvas=document.getElementById('starry-canvas');
+  if(!canvas)return;
+  const ctx=canvas.getContext('2d');
+  const hero=document.getElementById('hero');
+  function resize(){
+    canvas.width=hero.offsetWidth;
+    canvas.height=hero.offsetHeight;
+  }
+  resize();window.addEventListener('resize',resize);
+  const stars=[];
+  for(let i=0;i<120;i++){
+    stars.push({
+      x:Math.random()*canvas.width,
+      y:Math.random()*canvas.height,
+      r:Math.random()*2+0.3,
+      a:Math.random(),
+      speed:0.003+Math.random()*0.008,
+      phase:Math.random()*Math.PI*2
+    });
+  }
+  function drawStars(){
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    const t=Date.now()*0.001;
+    stars.forEach(s=>{
+      const twinkle=0.4+0.6*Math.sin(t*s.speed*100+s.phase);
+      ctx.beginPath();
+      ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
+      ctx.fillStyle=`rgba(255,255,255,${s.a*twinkle})`;
+      ctx.fill();
+      if(s.r>1.5){
+        ctx.beginPath();
+        ctx.arc(s.x,s.y,s.r*2,0,Math.PI*2);
+        ctx.fillStyle=`rgba(255,255,255,${s.a*twinkle*0.15})`;
+        ctx.fill();
+      }
+    });
+    requestAnimationFrame(drawStars);
+  }
+  drawStars();
+}
+
+/* ================ BUTTERFLY CURSOR TRAIL ================ */
+let lastButterflyTime=0;
+const butterflies=['🦋','🦋','🦋','🌸','✨'];
+document.addEventListener('mousemove',e=>{
+  if(Date.now()-lastButterflyTime<200)return;
+  lastButterflyTime=Date.now();
+  const b=document.createElement('div');
+  b.className='butterfly-trail';
+  b.textContent=butterflies[~~(Math.random()*butterflies.length)];
+  b.style.left=e.clientX+'px';
+  b.style.top=e.clientY+'px';
+  document.body.appendChild(b);
+  setTimeout(()=>b.remove(),1800);
+});
+
+/* ================ GIFT BOXES ================ */
+document.querySelectorAll('[data-gift]').forEach(box=>{
+  box.addEventListener('click',()=>{
+    if(box.classList.contains('opened'))return;
+    box.classList.add('opened');
+    const r=box.getBoundingClientRect();
+    createSparkle(r.left+r.width/2,r.top+r.height/2,12);
+    triggerConfetti(15);
+    // check if all opened
+    const allGifts=document.querySelectorAll('[data-gift]');
+    const openedGifts=document.querySelectorAll('[data-gift].opened');
+    if(allGifts.length===openedGifts.length){
+      setTimeout(()=>{triggerConfetti(40);triggerPetalRain()},600);
+    }
+  });
+});
+
+/* ================ ENVELOPE ================ */
+const envelopeWrap=document.getElementById('envelope-wrapper');
+envelopeWrap.addEventListener('click',()=>{
+  if(!envelopeWrap.classList.contains('opened')){
+    envelopeWrap.classList.add('opened');
+    const r=envelopeWrap.getBoundingClientRect();
+    createSparkle(r.left+r.width/2,r.top+r.height/3,10);
+    setTimeout(()=>createSparkle(r.left+r.width/2,r.top+r.height/2,8),500);
+  }
+});
+
+/* ================ POEM GENERATOR ================ */
+const poems=[
+  "In every sunrise, I see your smile,\nIn every star, your eyes that beguile.\nMy heart beats only to your song,\nWith you, my love, is where I belong.",
+  "Your laughter is my favorite sound,\nIn your embrace, my peace is found.\nLike moonlight on a quiet sea,\nYour love is everything to me.",
+  "A thousand words could never say,\nHow much I love you every day.\nYou paint my world in shades of gold,\nA love story forever told.",
+  "Before you, the world was black and white,\nNow every color shines so bright.\nYou are the poem I always dreamed,\nMore beautiful than anything I'd schemed.",
+  "If love were measured by the stars,\nMy love would reach beyond to Mars.\nYou are the magic in my days,\nMy heart is yours in endless ways.",
+  "With every breath, I fall anew,\nInto this wondrous love with you.\nLike petals dancing in the breeze,\nYou put my restless heart at ease.",
+  "Your name is written on my soul,\nYour love has made my broken whole.\nIn every lifetime, I would choose\nA love like ours I'll never lose.",
+  "The stars conspired to bring us near,\nTwo hearts entwined, forever dear.\nIn your eyes I found my home,\nWith you I'll never walk alone."
+];
+let currentPoemIdx=-1;
+const poemText=document.getElementById('poem-text');
+const poemAuthor=document.getElementById('poem-author');
+const poemBtn=document.getElementById('poem-btn');
+// show initial text
+setTimeout(()=>poemText.classList.add('visible'),300);
+
+poemBtn.addEventListener('click',()=>{
+  poemText.classList.remove('visible');
+  poemAuthor.classList.remove('visible');
+  let newIdx;
+  do{newIdx=~~(Math.random()*poems.length)}while(newIdx===currentPoemIdx&&poems.length>1);
+  currentPoemIdx=newIdx;
+  setTimeout(()=>{
+    poemText.innerHTML=poems[currentPoemIdx].replace(/\n/g,'<br>');
+    poemText.classList.add('visible');
+    poemAuthor.classList.add('visible');
+    const r=poemBtn.getBoundingClientRect();
+    createSparkle(r.left+r.width/2,r.top,6);
+  },400);
+});
+
 /* ================ START PAGE ================ */
 function startPage(){
   startAmbientPetals();
   startBalloons();
   startShootingStars();
   startLoveNotes();
+  initStarryCanvas();
 }
 </script>
 </body>
